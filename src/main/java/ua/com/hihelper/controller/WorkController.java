@@ -18,28 +18,28 @@ import ua.com.hihelper.service.WorkService;
 public class WorkController {
 
 	@Autowired
-	private WorkService workserv;
+	private WorkService workservice;
 	@Autowired
 	private UserService userservice;
 
 	@RequestMapping(value = "/allworks", method = RequestMethod.GET)
 	public String allworks(@ModelAttribute Work work, Model model) {
 
-		model.addAttribute("works", workserv.findAll());
+		model.addAttribute("works", workservice.findAll());
 		return "allworks";
 	}
 
 	@RequestMapping(value = "/deletework/{id}", method = RequestMethod.GET)
 	public String deletework(@PathVariable String id, Model model) {
-		workserv.delete(Integer.parseInt(id));
+		workservice.delete(Integer.parseInt(id));
 		return "redirect:/profile";
 
 	}
 
 	@RequestMapping(value = "/likeit/{id}", method = RequestMethod.GET)
 	public String likeit(@PathVariable String id, Model model, Principal principal) {
-		Work work = workserv.findOne(Integer.parseInt(id));
-		workserv.like(principal, work);
+		Work work = workservice.findOne(Integer.parseInt(id));
+		workservice.like(principal, work);
 		return "redirect:/allworks";
 
 	}
