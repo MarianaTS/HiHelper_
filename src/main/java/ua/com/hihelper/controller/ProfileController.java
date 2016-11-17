@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ua.com.hihelper.entity.User;
 import ua.com.hihelper.entity.Work;
+import ua.com.hihelper.repository.WorkRepository;
 import ua.com.hihelper.service.UserService;
 import ua.com.hihelper.service.WorkService;
 
@@ -24,6 +25,8 @@ public class ProfileController {
 	private UserService userService;
 	@Autowired
 	private WorkService workService;
+	@Autowired
+	private WorkRepository workrepository;
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home() {
@@ -90,6 +93,9 @@ public class ProfileController {
 	public String wholikes(Model model, Principal principal, @PathVariable String id) {
 		User user = userService.findFetchUser(Integer.parseInt(principal.getName()));
 		Work work = workService.findOne(Integer.parseInt(id));
-		return "infowork";
+		model.addAttribute("users", work.getLikes());
+		System.out.println("*********" + work.getLikes());
+		return "userswhichlike";
 	}
+
 }

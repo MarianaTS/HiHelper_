@@ -20,32 +20,37 @@
 </div>
 <div class="main">
 <div class="formreg">
-<sf:form  modelAttribute="user" action="appointmnetwork" method="POST" id="registerform">
+
+<table>
+				<tr>
+<td>${work.title}</td>
+<td>${work.type }</td>
+<td>${work.price}</td>
+<td>
+<p>${work.country}</p>
+<p>${work.city}</p>
+<p>${work.street}</p>
+<p>${work.building}</p>
+</td>
+				</tr>
 
 
+		</table>
+<sf:form  modelAttribute="user" action="appointmnetwork" method="GET" id="registerform">
 
-<input type="text" name="username" placeholder="username" >
+
+send to: ${employeer.getOriginUsername()}
+
 <br>
 <br>
- <input type="text" placeholder="password" name="password">
+<input type="hidden"  name="sender_id" value="${sender.username}">
+ <input type="hidden"  name="work_id" value="${work.id}">
+ <textarea   name="textmessage"  placeholder="Add your message" rows="10" ></textarea>
+ <br>
 <br>
-<br>
-<input type="text" placeholder="email" name="email">
-<br>
-<br>
-<input type="text" placeholder="phonenumber" name="phonenumber">
-<br>
-<br>
-<input type="number" placeholder="age" name="age">
-<br>
-<br>
-<input type="text" placeholder="country" name="country">
-<br>
-<br>
-<input type="text" placeholder="city" name="city">
-<br>
-<br> 
- <textarea   path="description"  placeholder="users description" rows="10" ></textarea>
+ 
+ from:
+ ${sender.getOriginUsername()}
 <br>
 <br> 
 <input type="submit" value="SAVE">

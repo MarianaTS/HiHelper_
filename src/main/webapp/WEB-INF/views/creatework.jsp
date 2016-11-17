@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="resources\stylerega.css">
-<title>Insert title here</title>
+<title>Create service</title>
 </head>
 <body>
 <div class="header">
@@ -29,16 +29,21 @@
 <input type="text" name="price" placeholder="price" >
 <br>
 <br>
- <input type="date" name="startdate" placeholder="beginning date" >
-<br>
-<br>
-<input type="time" name="starttime" placeholder="beginning time" >
-<br>
-<br>
 <input type="text" name="type" placeholder="type" >
 <br>
 <br>
-
+<input type="text" name="country" placeholder="country" >
+<br>
+<br>
+<input type="text" name="city" placeholder="city" >
+<br>
+<br>
+<input type="text" name="street" placeholder="street" >
+<br>
+<br>
+<input type="number" name="building" placeholder="building" >
+<br>
+<br>
 <input type="submit" value="SAVE">
 
 </sf:form>

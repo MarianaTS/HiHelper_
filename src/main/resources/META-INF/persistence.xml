@@ -10,7 +10,7 @@
             <property name="hibernate.connection.password" value="data3563" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update" />
-            <property name="show_sql" value="true"/>
+            <property name="hibernate.show_sql" value="true"/>
 
             <property name="hibernate.connection.provider_class" value="com.zaxxer.hikari.hibernate.HikariConnectionProvider" />
             <property name="hibernate.hikari.minimumIdle" value="20" />

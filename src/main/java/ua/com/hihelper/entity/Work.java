@@ -1,6 +1,8 @@
 package ua.com.hihelper.entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -12,8 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Work {
@@ -24,20 +25,16 @@ public class Work {
 
 	private String title;
 	private String type;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private String startdate;
-	@DateTimeFormat(pattern = "HH:mm")
-	private String starttime;
 	private double price;
+	private String country;
+	private String city;
+	private String street;
+	private String building;
 
 	private String description;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	private User user;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "location_id")
-	private Location location;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "Likes", joinColumns = @JoinColumn(name = "work_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
@@ -45,20 +42,18 @@ public class Work {
 
 	private int count;
 
+	@OneToMany(mappedBy = "work")
+	private List<Schedule> schedule = new ArrayList<>();
+
+	@OneToMany(mappedBy = "work", fetch = FetchType.EAGER)
+	private List<Appointment> appointment = new ArrayList<>();
+
 	public int getCount() {
 		return count;
 	}
 
 	public void setCount(int count) {
 		this.count = count;
-	}
-
-	public Location getLocation() {
-		return location;
-	}
-
-	public void setLocation(Location location) {
-		this.location = location;
 	}
 
 	public Set<User> getLikes() {
@@ -130,20 +125,58 @@ public class Work {
 		this.user = user;
 	}
 
-	public String getStartdate() {
-		return startdate;
+	@Override
+	public String toString() {
+		return "Work [title=" + title + ", type=" + type + ", price=" + price + ", description=" + description
+				+ ", user=" + user + ", count=" + count + "]";
 	}
 
-	public void setStartdate(String startdate) {
-		this.startdate = startdate;
+	public String getCountry() {
+		return country;
 	}
 
-	public String getStarttime() {
-		return starttime;
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
-	public void setStarttime(String starttime) {
-		this.starttime = starttime;
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getBuilding() {
+		return building;
+	}
+
+	public void setBuilding(String building) {
+		this.building = building;
+	}
+
+	public List<Schedule> getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(List<Schedule> schedule) {
+		this.schedule = schedule;
+	}
+
+	public List<Appointment> getAppointment() {
+		return appointment;
+	}
+
+	public void setAppointment(List<Appointment> appointment) {
+		this.appointment = appointment;
 	}
 
 }

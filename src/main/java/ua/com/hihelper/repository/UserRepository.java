@@ -12,7 +12,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	UserDetails findUserByUsername(String username);
 
 	@Query(value = "select u from User u left join fetch u.works where u.id=:id")
-
 	User findFetchUser(@Param("id") int id);
 
 }

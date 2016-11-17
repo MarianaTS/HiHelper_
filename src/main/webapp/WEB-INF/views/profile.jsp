@@ -77,20 +77,38 @@
 <td>${work.title}</td>
 <td>${work.type }</td>
 <td>${work.price}</td>
-<td>${work.startdate}</td>
-<td>${work.starttime}</td>
+<td>
+<p>${work.country}</p>
+<p>${work.city}</p>
+<p>${work.street}</p>
+<p>${work.building}</p>
+</td>
+
 <td><a href="./deletework/${work.id}">delete</a></td>
 
-<td><a href="wholikes" id="like"><img src="http://www.rsinfrafacility.com/wp-content/uploads/2015/10/512.png" width="20px" height="20px"> ${work.count}</a></td>
-
+<td><a href="./wholikes/${work.id}" id="like"><img src="http://www.rsinfrafacility.com/wp-content/uploads/2015/10/512.png" width="20px" height="20px"> ${countapp}</a></td>
+<td><sf:form action="appointments" method="GET">
+					<input type="hidden" name="id" value="${work.id}"  />
+					<input type="submit"  value="appointments">
+					</sf:form>  </td>
 </tr>
 
 </c:forEach>
 
 </table>
+</div>
 
+<div id="users">
+<table>
+<%-- <c:forEach items="${users}" var="user"> --%>
+<tr>
+<td>${user.getOriginUsername()}</td>
+</tr>
+<%-- </c:forEach> --%>
+</table>
+</div>
 
 <div class="button"><a href="creatework" > Create new work</a></div>
-</div>
+
 </body>
 </html>

@@ -1,9 +1,7 @@
 package ua.com.hihelper.serviceimpl;
 
 import java.security.Principal;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -11,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
+import ua.com.hihelper.entity.Schedule;
 import ua.com.hihelper.entity.User;
 import ua.com.hihelper.entity.Work;
 import ua.com.hihelper.repository.UserRepository;
@@ -65,22 +64,38 @@ public class WorkServiceImpl implements WorkService {
 
 	}
 
+	@Modifying
+	@Transactional
 	@Override
-	public void like(Principal principal, Work work) {
+	public void like(Principal principal, int id) {
 		User user = userservice.findFetchUser(Integer.parseInt(principal.getName()));
-		Set<User> likes = new HashSet<>();
-		likes.addAll(work.getLikes());
-		if (likes.contains(user)) {
-			likes.remove(user);
-			work.setCount(likes.size() - 1);
-			save(work);
-		} else {
+		Work work = workRepository.workwithusers(id);
 
-			likes.add(userservice.findFetchUser(Integer.parseInt(principal.getName())));
-			work.setLikes(likes);
-			work.setCount(likes.size());
+		System.out.println(work.getLikes());
+
+		if (work.getLikes().contains(user)) {
+			work.getLikes().remove(user);
+			work.setCount(work.getLikes().size());
 			save(work);
 		}
+
+		else {
+
+			work.getLikes().add(user);
+			work.setCount(work.getLikes().size());
+			save(work);
+		}
+		System.out.println(work.getLikes());
+
+	}
+
+	@Modifying
+	@Transactional
+	@Override
+	public void addSchedule(Work work, Schedule schedule) {
+
+		work.getSchedule().add(schedule);
+		save(work);
 
 	}
 

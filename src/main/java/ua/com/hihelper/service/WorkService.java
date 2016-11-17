@@ -3,6 +3,7 @@ package ua.com.hihelper.service;
 import java.security.Principal;
 import java.util.List;
 
+import ua.com.hihelper.entity.Schedule;
 import ua.com.hihelper.entity.Work;
 
 public interface WorkService {
@@ -17,5 +18,7 @@ public interface WorkService {
 
 	void addwork(Principal principal, Work work);
 
-	void like(Principal principal, Work work);
+	void like(Principal principal, int id);
+
+	void addSchedule(Work work, Schedule schedule);
 }

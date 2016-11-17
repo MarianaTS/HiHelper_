@@ -47,6 +47,9 @@ public class User implements UserDetails {
 	@Enumerated
 	private Role role;
 
+	@OneToMany(mappedBy = "sender", fetch = FetchType.EAGER)
+	private List<Appointment> appointment = new ArrayList<>();
+
 	public String getPhonenumber() {
 		return phonenumber;
 	}
@@ -228,6 +231,12 @@ public class User implements UserDetails {
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password + ", email=" + email + ", phonenumber="
+				+ phonenumber;
 	}
 
 }
