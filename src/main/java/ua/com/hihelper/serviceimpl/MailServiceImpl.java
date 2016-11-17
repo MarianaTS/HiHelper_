@@ -61,5 +61,42 @@ try{
             System.out.println("You have some problems with connection!");}
 
 		  }
+	
+	
+	@Async
+	 public void sendMessagefromuser(String content, String email, String mailBody, String ADMINMAIL , String PASSWORD) {
+		        Properties properties = System.getProperties();
+		        properties.setProperty("mail.smtp.starttls.enable", "true");
+		        properties.setProperty("mail.smtp.auth", "true");
+		        properties.setProperty("mail.smtp.port", "465");
+		        properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+		        properties.setProperty("mail.smtp.socketFactory.port", "465");
+		        properties.setProperty("mail.smtp.socketFactory.class",
+		                "javax.net.ssl.SSLSocketFactory");
+		        Session session = Session.getDefaultInstance(properties,
+		                new Authenticator() {
+		                    protected PasswordAuthentication getPasswordAuthentication() {
+		                        return new PasswordAuthentication(ADMINMAIL, PASSWORD);
+		                    }
+		                });
+try{
+		MimeMessage message=new MimeMessage(session);
+		message.setFrom(new InternetAddress(ADMINMAIL));
+		 message.addRecipient(Message.RecipientType.TO, new InternetAddress(
+                email));
+        message.setSubject(content, "UTF-8");
+        message.setText(mailBody);
+        synchronized (this) {
+            Transport.send(message);
+} 
+	
+	}
+
+		catch (MessagingException mex) {
+           mex.printStackTrace();
+           System.out.println("You have some problems with connection!");}
+
+		  }
+	
 	}	
 

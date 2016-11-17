@@ -29,7 +29,7 @@
 <div class="main">
 	<div class="userdet">
 	
-<img src="http://media.mnn.com/assets/images/2016/02/angry-cat.jpg.838x0_q80.jpg" alt="your img">
+<img src="${user.pathImage}" alt="your img">
 <p>${user.getOriginUsername()} </p>
 
 </div>

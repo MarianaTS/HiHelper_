@@ -22,11 +22,12 @@
 	</ul>
 </div>
 
-<div class="main">
+<div class="main ">
 	<div class="userdet">
 <p>${user.getOriginUsername()} </p>
 
 </div>
+<div class="works">
 <table>
 <tr>
 <td>${work.title}</td>
@@ -48,18 +49,28 @@
 
 <td><p>${app.messagetext}</p> </td>
 <td><p>${app.sender.getOriginUsername()}</p>
-<p>${app.sender.email}</p>  </td>
+    <p>${app.sender.email}</p>  </td>
+
+
+
+
+
+<td><sf:form action="answer" method="GET">
+					<input type="hidden" name="id_client" value="${app.sender.id}"/>
+					<input type="hidden" name="id_work" value="${work.id}"  />
+					<input type="submit"  value="ANSWERE">
+					</sf:form>  </td>
 
 <td><sf:form action="deleteapp" method="GET">
 					<input type="hidden" name="id" value="${work.id}"/>
 					<input type="hidden" name="app_id" value="${app.id}"  />
 					<input type="submit"  value="DELETE">
 					</sf:form>  </td>
-</tr>
-
+					</tr>
 </c:forEach>
 
 </table>
+</div>
 </div>
 
 

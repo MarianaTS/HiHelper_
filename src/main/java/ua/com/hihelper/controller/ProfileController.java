@@ -59,7 +59,7 @@ public class ProfileController {
 	}
 
 	@RequestMapping(value = "/editthisuser", method = RequestMethod.POST)
-	public String editProfileUser(@ModelAttribute User user, Model model, Principal principal) {
+	public String editProfileUser(@ModelAttribute User user, Model model, Principal principal, @RequestParam String password) {
 
 		User user2 = userService.findFetchUser(Integer.parseInt(principal.getName()));
 		user2.setAge(user.getAge());
@@ -68,7 +68,8 @@ public class ProfileController {
 		user2.setEmail(user.getEmail());
 		user2.setCountry(user.getCountry());
 		user2.setDescription(user.getDescription());
-		userService.save(user2);
+		user2.setPassword(password);
+		userService.update(user2);
 		return "redirect:/profile";
 	}
 

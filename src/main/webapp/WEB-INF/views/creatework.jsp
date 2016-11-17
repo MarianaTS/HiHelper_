@@ -35,6 +35,13 @@
 <input type="text" name="country" placeholder="country" >
 <br>
 <br>
+
+<input type="date" name="startdate" placeholder="date" >
+<br>
+<br>
+<input type="time" name="starttime" placeholder="time" >
+<br>
+<br>
 <input type="text" name="city" placeholder="city" >
 <br>
 <br>

@@ -16,6 +16,7 @@ import ua.com.hihelper.entity.User;
 import ua.com.hihelper.entity.Work;
 import ua.com.hihelper.repository.ScheduleRepository;
 import ua.com.hihelper.service.AppointmentService;
+import ua.com.hihelper.service.MailService;
 import ua.com.hihelper.service.UserService;
 import ua.com.hihelper.service.WorkService;
 
@@ -31,7 +32,11 @@ public class WorkController {
 	private ScheduleRepository schedulerep;
 
 	@Autowired
-	private AppointmentService appservice;;
+	private AppointmentService appservice;
+	
+	@Autowired
+	private MailService mailservice;
+	
 
 	@RequestMapping(value = "/allworks", method = RequestMethod.GET)
 	public String allworks(@ModelAttribute Work work, Model model) {
@@ -122,6 +127,29 @@ public class WorkController {
 		appservice.delete(Integer.parseInt(id_app));
 
 		return "redirect:/profile";
+
+	}
+	
+	@RequestMapping(value = "/answer", method = RequestMethod.GET)
+	public String answere(Model model, @RequestParam("id_client") String id_client, @RequestParam("id_work") String id_work, Principal principal) {
+
+		
+		model.addAttribute("client", userservice.findOne(Integer.parseInt(id_client)));
+		model.addAttribute("sender", userservice.findFetchUser(Integer.parseInt(principal.getName())));
+		return "answer";
+
+	}
+	
+	
+	@RequestMapping(value = "/answertoappointmentr", method = RequestMethod.GET)
+	public String sendanswer(Model model, Principal principal, @RequestParam("text") String text, @RequestParam("client_email") String clem,
+			@RequestParam("password") String password) {
+
+		User sender=userservice.findFetchUser(Integer.parseInt(principal.getName()));
+		
+		mailservice.sendMessagefromuser("answer", clem, text, sender.getEmail(), password);
+
+		return "home";
 
 	}
 

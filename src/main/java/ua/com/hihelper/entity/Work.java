@@ -30,6 +30,8 @@ public class Work {
 	private String city;
 	private String street;
 	private String building;
+	private String startdate;
+	private String starttime;
 
 	private String description;
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -178,5 +180,23 @@ public class Work {
 	public void setAppointment(List<Appointment> appointment) {
 		this.appointment = appointment;
 	}
+
+	public String getStartdate() {
+		return startdate;
+	}
+
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+
+	public String getStarttime() {
+		return starttime;
+	}
+
+	public void setStarttime(String starttime) {
+		this.starttime = starttime;
+	}
+	
+	
 
 }

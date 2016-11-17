@@ -22,7 +22,8 @@
 
     <mvc:annotation-driven/>
 
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:resources mapping="/file/**" location="file:${catalina.home}/resources/"/>
+    <mvc:resources mapping="/resources/**" location="/resources/" />
 
 
 

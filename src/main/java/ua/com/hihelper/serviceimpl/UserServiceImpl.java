@@ -72,31 +72,34 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 		User user = userRepository.findFetchUser(Integer.parseInt(principal.getName()));
 
-		String path = "resources\\" + user.getOriginUsername() + "\\" + multipartFile.getOriginalFilename();
+		String path = System.getProperty("catalina.home")+"/resources/"
+                + user.getOriginUsername() + "/" + multipartFile.getOriginalFilename();
 
-		user.setPathImage("resources/" + user.getOriginUsername() + "/" + multipartFile.getOriginalFilename());
+		user.setPathImage("file/"+user.getOriginUsername() + "/" + multipartFile.getOriginalFilename());
 
 		File file = new File(path);
-		System.out.println(path);
 
 		try {
 			file.mkdirs();
 
 			try {
-				FileUtils.cleanDirectory(new File("resources\\" + user.getOriginUsername() + "\\"));
+				FileUtils.cleanDirectory(new File(System.getProperty("catalina.home")+"/resources/" + user.getOriginUsername() + "/"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			try {
-				FileUtils.cleanDirectory(new File("resources\\" + user.getOriginUsername() + "\\"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			
 			multipartFile.transferTo(file);
 		} catch (IOException e) {
 			System.out.println("error with file");
 		}
 		userRepository.save(user);
 	}
+
+	@Override
+	public void update(User user) {
+		userRepository.save(user);
+	}
+	
+	
 
 }

@@ -22,5 +22,7 @@ public interface UserService {
 
 	void saveImg(Principal principal, MultipartFile multipartfile);
 
+	
+	public void update(User user);
 
 }

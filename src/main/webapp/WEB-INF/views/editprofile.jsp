@@ -21,7 +21,6 @@
 <div class="main">
 <div class="formreg">
 <sf:form modelAttribute="user" action="editthisuser" method="POST" >
-
 		<input type="text" placeholder="email" name="email" value="${user.getEmail()}">
 		<br>
 		<br>
@@ -29,6 +28,9 @@
 		<br>
 		<br>
 		<input type="number" placeholder="age" name="age" value="${user.getAge()}">
+		<br>
+		<br>
+		<input type="password" placeholder="password" name="password" required>
 		<br>
 		<br>
 		<input type="text" placeholder="country" name="country" value="${user.getCountry()}">
@@ -41,13 +43,13 @@
 		<br>
 			<input type="submit" value="SAVE">
 		</sf:form>
-		<%-- <br>
-			</sf:form>
+	<br>
+			
 	<sf:form action="./saveImage?${_csrf.parameterName}=${_csrf.token}"
 		method="POST" enctype="multipart/form-data">
 		<input type="file" name="image">
 		<button >ADD PHOTO</button>
-	</sf:form> --%>
+	</sf:form> 
 	<br>
 	
 
